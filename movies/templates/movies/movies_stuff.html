@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <title>Movie App</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  
+</head>
+<body>
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Clever Movie</a>
+    </div>
+    <form class="navbar-form navbar-left" action="" name="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search" name="movie_name" value="">
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+	<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modal-create">Create</button>
+  </div>
+</nav>
+  
+<div class="container">
+	<!-- Show notifications (if any) -->
+                    
+  <div class="row">
+  {% for movie in response %}
+		<div class="col-md-3">
+		  <h3>{{movie.Name}}</h3>
+		  <img src="{{movie.Picture}}" alt="movie_image" class="img-thumbnail img-responsive" style="height:300px;width:250px;">
+		  <center>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#song-{{movie.id}}">Songs</button>
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-{{movie.id}}">View Details</button>
+		</center>
+		</div>
+		{% include "movies/songs.html"%}
+		{% include "movies/detail-modal.html"%}
+		{% include "movies/edit-modal.html"%}
+	{% endfor %}
+  </div>
+</div>
+{% include "movies/create-modal.html"%}
+<!--JAVASCRIPTS-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>
